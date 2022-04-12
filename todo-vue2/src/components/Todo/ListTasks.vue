@@ -7,7 +7,7 @@
          
       >
         <div>{{ board.title }}</div>
-        <v-list-item-action v-if="$store.state.boardSorting">
+        <v-list-item-action v-if="$store.state.todo.boardSorting">
           <v-btn icon class="handle-board">
             <v-icon :style="{ color: board.color }">mdi-drag-horizontal</v-icon>
           </v-btn>
@@ -75,12 +75,12 @@ export default {
   computed: {
     tasks: {
       get() {
-        return this.$store.getters.tasksFiltered.filter(
+        return this.$store.getters['todo/tasksFiltered'].filter(
           (task) => task.list === this.board.list
         );
       },
       set(value) {
-        this.$store.dispatch("setTasks", value);
+        this.$store.dispatch("todo/setTasks", value);
       },
     },
   },

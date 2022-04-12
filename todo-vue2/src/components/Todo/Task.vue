@@ -25,7 +25,7 @@
             {{ task.dueDate | niceDate }}
           </v-list-item-action-text>
         </v-list-item-action>
-        <v-list-item-action v-if="$store.state.sorting">
+        <v-list-item-action v-if="$store.state.todo.sorting">
           <v-btn icon class="handle">
             <v-icon>mdi-drag-horizontal</v-icon>
           </v-btn>
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     doneTask(id) {
-      this.$store.dispatch("doneTask", id);
+      this.$store.dispatch("todo/doneTask", id);
     },
   },
 };

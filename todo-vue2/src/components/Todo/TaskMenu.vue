@@ -75,7 +75,7 @@ export default {
         title: "Sort",
         icon: "mdi-drag-horizontal-variant",
         click() {
-          this.$store.commit('toggleSorting')
+          this.$store.commit('todo/toggleSorting')
         },
       },     
     ],

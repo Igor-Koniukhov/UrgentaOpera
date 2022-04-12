@@ -36,7 +36,7 @@ export default {
     props: ['board'],
     methods:{
          deleteBoard(id) {
-      this.$store.dispatch("deleteBoard", id);
+      this.$store.dispatch("todo/deleteBoard", id);
     },
     }
 

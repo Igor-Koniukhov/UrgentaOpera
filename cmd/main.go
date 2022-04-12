@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"os"
 	"os/signal"
@@ -21,10 +22,8 @@ func main() {
 		fmt.Println(err)
 	}
 	defer Dr.SQL.Close()
-
 	rep := repository.NewRepository(app, Dr.SQL)
 	www := handlers.NewHandlerStruct(app, *rep)
-
 	srv := &server.Server{}
 	go func() {
 		err := srv.Serve(
@@ -37,7 +36,7 @@ func main() {
 		}
 	}()
 
-	fmt.Println(" TAXI APPLICATION STARTED ON PORT" +
+	fmt.Println(" TODO APPLICATION STARTED ON PORT" +
 		os.Getenv("PORT") +
 		os.Getenv("CONSOLE_NUV_API"))
 

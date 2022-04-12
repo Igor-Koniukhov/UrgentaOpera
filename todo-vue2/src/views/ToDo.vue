@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <field-add-task />
-    <div class="pa-3" v-if="$store.state.tasks.length">
+    <div class="pa-3" v-if="$store.state.todo.tasks.length">
       <draggable handle=".handle-board" group="board" v-model="boards">
         <list-tasks
           class="ma-1 board"
@@ -16,11 +16,11 @@
 
     <no-tasks v-else />
     <button-done-sorting
-      v-if="$store.state.sorting"
+      v-if="$store.state.todo.sorting"
       :toggleSorting="toggleSorting"
     />
     <button-done-sorting
-      v-if="$store.state.boardSorting"
+      v-if="$store.state.todo.boardSorting"
       :toggleSorting="toggleBoardSorting"
     />
   </div>
@@ -43,11 +43,11 @@ export default {
   data() {
     return {
       toggleSorting: {
-        comm: "toggleSorting",
+        commitMessage: "todo/toggleSorting",
         buttonTitle: "finish task sorting",
       },
       toggleBoardSorting: {
-        comm: "toggleBoardSorting",
+        commitMessage: "todo/toggleBoardSorting",
         buttonTitle: "finish board sorting",
       },
     };
@@ -55,10 +55,10 @@ export default {
   computed: {
     boards: {
       get() {
-        return this.$store.state.boards;
+        return this.$store.state.todo.boards;
       },
       set(value) {
-        this.$store.dispatch("setBoards", value);
+        this.$store.dispatch("todo/setBoards", value);
       },
     },
   },

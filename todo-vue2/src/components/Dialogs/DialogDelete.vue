@@ -36,7 +36,7 @@ export default {
     props: ['task'],
     methods:{
          deleteTask(id) {
-      this.$store.dispatch("deleteTask", id);
+      this.$store.dispatch("todo/deleteTask", id);
     },
     }
 

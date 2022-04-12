@@ -38,7 +38,7 @@ export default {
           id: this.task.id,
           title: this.taskTitle,
         };
-        this.$store.dispatch("updateTasktitle", payload);
+        this.$store.dispatch("todo/updateTasktitle", payload);
         this.$emit("close");
       }
     },

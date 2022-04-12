@@ -27,7 +27,7 @@ export default {
   methods: {
     addTask() {
       if (!this.newTaskTitleInvalid) {
-        this.$store.dispatch("addTask", this.newTaskTitle)
+        this.$store.dispatch("todo/addTask", this.newTaskTitle)
         this.newTaskTitle = ''
       }
     },

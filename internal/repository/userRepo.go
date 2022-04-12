@@ -33,8 +33,8 @@ func NewUserRepo(app *configs.AppConfig, db *sql.DB) *UserRepo {
 func (u *UserRepo) CreateUser(user *models.User) (*models.User, int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
-	sqlStmt := fmt.Sprintf("INSERT INTO %s (name, email, phone, password, status_free)"+
-		" VALUES(?,?,?,?, true) ", models.TableUsers)
+	sqlStmt := fmt.Sprintf("INSERT INTO %s (name, email, phone, password)"+
+		" VALUES(?,?,?,?) ", models.TableUsers)
 	pass, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
 		fmt.Println(err)

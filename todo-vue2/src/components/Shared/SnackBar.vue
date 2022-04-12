@@ -1,12 +1,12 @@
 <template>
    <v-snackbar
-      v-model="$store.state.snackbar.show"
+      v-model="$store.state.todo.snackbar.show"
     >
-      {{ $store.state.snackbar.text }}
+      {{ $store.state.todo.snackbar.text }}
 
       <template v-slot:action="{ attrs }">
         <v-btn
-         @click="$store.commit('hideSnackBar')"         
+         @click="$store.commit('todo/hideSnackBar')"
           text
           v-bind="attrs"
          

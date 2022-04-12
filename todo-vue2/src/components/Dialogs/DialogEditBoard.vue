@@ -1,7 +1,7 @@
 <template>
   <v-dialog :value="true" persistent max-width="320">
     <v-card>
-      <v-card-title class="text-h5"> Update the feilds: </v-card-title>
+      <v-card-title class="text-h5"> Update the fields: </v-card-title>
       <v-card-text>
         <v-text-field
           class="pb-3 mr-auto"
@@ -13,7 +13,7 @@
         />
         <div class="pa-3">
           <v-row>
-            <div>Choose task backgraund :</div>
+            <div>Choose task background :</div>
             <input
               class="ml-auto"
               type="color"
@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     updateBoard() {
-      console.log(this.boardTitle, "updateBoard");
       if (!this.boardTitleInvalid) {
         let payload = {
           list: this.board.list,
@@ -62,7 +61,7 @@ export default {
           backgroundColor: this.boardBackgroundColor,
           color: this.color,
         };
-        this.$store.dispatch("updateBoard", payload);
+        this.$store.dispatch("todo/updateBoard", payload);
         setTimeout(() => {
           this.$emit("close");
         }, 300);

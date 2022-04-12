@@ -40,7 +40,7 @@ export default {
   components: {},
   data() {
     return {
-      list: this.$store.state.boards.length,
+      list: this.$store.state.todo.boards.length,
       board: {
         list: "",
         title: "",
@@ -52,7 +52,7 @@ export default {
   methods: {
     addBoard() {
       this.list++;
-      this.$store.dispatch("addBoard", {
+      this.$store.dispatch('todo/addBoard', {
         list: this.list,
         title: this.board.title,
         backgroundColor: this.board.backgroundColor,

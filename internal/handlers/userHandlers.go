@@ -71,6 +71,7 @@ func (u *User) Registration(w http.ResponseWriter, r *http.Request) {
 	user := models.User{
 		Name:     data["name"],
 		Email:    data["email"],
+		Phone:    data["phoneNumber"],
 		Password: data["password"],
 	}
 	_, id, err := u.repo.CreateUser(&user)

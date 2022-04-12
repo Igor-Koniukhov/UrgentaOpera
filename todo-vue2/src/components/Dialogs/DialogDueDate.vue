@@ -28,7 +28,7 @@ export default {
             id: this.task.id,
             dueDate: this.date,
         }
-        this.$store.dispatch('updateTaskDueDate', payload)
+        this.$store.dispatch('todo/updateTaskDueDate', payload)
         this.$emit('close')
     },
   },

@@ -19,12 +19,9 @@ type HandlerStruct struct {
 
 func NewHandlerStruct(app *configs.AppConfig, repo repository.Repository) *HandlerStruct {
 	return &HandlerStruct{
-
-		UserI: NewUser(app, repo),
-
+		UserI:       NewUser(app, repo),
 		MiddlewareI: NewMiddleware(app),
-
-		JwTokenI: jwtoken.NewJwToken(app, repo),
+		JwTokenI:    jwtoken.NewJwToken(app, repo),
 	}
 }
 func NewHandlers(www *HandlerStruct) {

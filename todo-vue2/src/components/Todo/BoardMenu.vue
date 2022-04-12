@@ -68,7 +68,7 @@ export default {
         title: "Sort Board",
         icon: "mdi-drag-horizontal-variant",
         click() {
-          this.$store.commit('toggleBoardSorting')
+          this.$store.commit('todo/toggleBoardSorting')
         },
       },
       {
@@ -77,7 +77,7 @@ export default {
         click() {
           console.log("add board");
           this.dialogs.board = true;
-          this.$store.commit('toggleAddBoard')
+          this.$store.commit('todo/toggleAddBoard')
         },
       },
     ],

@@ -1,7 +1,7 @@
 <template>
   <v-text-field
     :value="$store.state.search"
-    @input="$store.commit('setSearch', $event)"
+    @input="$store.commit('todo/setSearch', $event)"
     @focus="searchClosed = false"
     @blur="searchClosed = true"
     class="expanding-search mt-1"

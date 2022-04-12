@@ -4,7 +4,7 @@
       <v-img class="avatar-back" height="170" src="wheat.jpg">
         <div class="img-justify pt-6">
           <v-avatar size="60">
-            <img class="img-avatar" src="i_koniukhov.jpg" alt="Igor" />
+            <img class="img-avatar" src="i_koniukhov.jpg" alt="Igor"/>
           </v-avatar>
           <div class="avatar-text avatar-text__frederica">Koniukhov Igor</div>
           <div class="avatar-text">
@@ -13,30 +13,59 @@
         </div>
       </v-img>
       <v-list dense nav>
-        <v-list-item v-for="item in items" :key="item.title" :to="item.to" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+        <div v-for="item in items" :key="item.title" k>
+          <v-list-item  :to="item.to" lin>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
 
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+
+          </v-list-item>
+        </div>
+        <v-list-item v-if="!$store.state.auth.isLogin" to="/registration" lin>
+          <v-list-item-icon >
+            <v-icon>mdi-account-circle-outline </v-icon>
+          </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>Registration</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item v-if="!$store.state.auth.isLogin" to="/login" lin>
+          <v-list-item-icon >
+            <v-icon>mdi-login-variant </v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Login</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item @click="Logout" v-if="$store.state.auth.isLogin">
+          <v-list-item-icon >
+            <v-icon>mdi-logout-variant </v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar
-      app
-      color="primary"
-      dark
-      :src="!drawer ? 'rus_nax.jpeg' : 'wheat.jpg'"
-      height="170"
-      prominent
+        app
+        color="primary"
+        dark
+        :src="!drawer ? 'rus_nax.jpeg' : 'wheat.jpg'"
+        height="170"
+        prominent
     >
       <template v-slot:img="{ props }">
         <v-img
-          v-bind="props"
-          :gradient="
+            v-bind="props"
+            :gradient="
             !drawer
               ? 'to top right, rgba(0,0,0,.3), rgba(25,32,72,.1)'
               : 'to top right ,  rgba(0, 0, 0, .5), rgba(231, 197, 75, .2)'
@@ -48,7 +77,7 @@
         <v-row>
           <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
           <v-spacer></v-spacer>
-          <search />
+          <search/>
         </v-row>
         <v-row class="mt-8">
           <h1 class="ml-4 text-h5 mt-8 federica-font">
@@ -60,7 +89,7 @@
     </v-app-bar>
     <v-main>
       <router-view></router-view>
-      <snack-bar />
+      <snack-bar/>
     </v-main>
   </v-app>
 </template>
@@ -73,23 +102,30 @@ export default {
     "live-date-time": require("@/components/Tools/LiveDateTime.vue").default,
   },
   data: () => ({
+
     drawer: null,
     items: [
-      { title: "Todo", icon: "mdi-format-list-checks", to: "/" },
-      { title: "About", icon: "mdi-help-box", to: "/about" },
-      { title: "Calendar", icon: "mdi-help-box", to: "/calendar" },
-     
-      
+      { title: "Todo", icon: "mdi-format-list-checks", to: "/"},
+      { title: "About", icon: "mdi-help-box", to: "/about"},
+      { title: "Calendar", icon: "mdi-calendar-month-outline", to: "/calendar"},
     ],
   }),
   computed: {
     appTitle() {
       return process.env.VUE_APP_TITLE;
     },
+
   },
-  mounted(){
-    this.$store.dispatch('getTasks')
-    this.$store.dispatch('getBoards')
+  methods:{
+    Logout(){
+      this.$store.commit('auth/setIsNotLogin')
+      this.$router.push('/login')
+    }
+
+  },
+  mounted() {
+    this.$store.dispatch('todo/getTasks')
+    this.$store.dispatch('todo/getBoards')
   }
 };
 </script>
@@ -102,29 +138,36 @@ export default {
   .federica-font {
     font-family: "Fredericka the Great", cursive !important;
   }
+
   .federica-font__red {
     font-family: "Fredericka the Great", cursive !important;
     color: red;
   }
 }
+
 .v-responsive__content {
   display: flex;
   justify-content: center;
+
   .img-justify {
     display: flex;
     align-items: center;
     flex-direction: column;
   }
 }
+
 .avatar-text {
   color: #f3f3f3;
   z-index: 150;
+
   &__frederica {
     font-family: "Fredericka the Great", cursive;
   }
 }
+
 .avatar-back {
   position: relative;
+
   &:before {
     display: block;
     content: "";
