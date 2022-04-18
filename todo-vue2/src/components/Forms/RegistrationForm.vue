@@ -161,7 +161,9 @@ export default {
         confirmPassword: this.registration.confirmPassword,
       })
       this.clear()
-      this.$router.push('/login')
+      setTimeout(()=>{
+        this.$router.push('/login')
+      }, 2000)
 
     },
     clear() {

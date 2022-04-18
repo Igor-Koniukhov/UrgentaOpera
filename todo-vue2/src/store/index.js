@@ -5,14 +5,14 @@ import todoModule from "./modules/todo/todo"
 import authentication from "./modules/auth/auth"
 
 
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  modules: {
-    todo: todoModule,
-    auth: authentication,
-  },
+    modules: {
+        todo: todoModule,
+        auth: authentication,
+    },
+
 
 
 });

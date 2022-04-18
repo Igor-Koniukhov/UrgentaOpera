@@ -13,7 +13,6 @@ import (
 type UserRepository interface {
 	CreateUser(user *models.User) (*models.User, int, error)
 	GetAllUsers() ([]models.User, error)
-	GetAllFreeUsers() ([]models.User, error)
 	GetUserByEmail(email string) (*models.User, error)
 	GetUserByID(id int) (models.User, error)
 	CheckToken(token string) (passRes models.PasswordReset, err error)
@@ -87,35 +86,7 @@ func (u *UserRepo) GetAllUsers() ([]models.User, error) {
 	return u.users, nil
 
 }
-func (u *UserRepo) GetAllFreeUsers() ([]models.User, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-	defer cancel()
-	sqlStmt := fmt.Sprintf("SELECT id, name, phone, email, status_free,"+
-		" created_at, updated_at FROM %s WHERE status_free=true",
-		models.TableUsers)
-	results, err := u.DB.QueryContext(ctx, sqlStmt)
-	if err != nil {
-		fmt.Println(err)
-		return nil, err
-	}
-	for results.Next() {
-		err = results.Scan(
-			&u.user.ID,
-			&u.user.Name,
-			&u.user.Phone,
-			&u.user.Email,
-			&u.user.StatusFree,
-			&u.user.CreatedAt,
-			&u.user.UpdatedAt,
-		)
-		if err != nil {
-			fmt.Println(err)
-			return nil, err
-		}
-		u.users = append(u.users, u.user)
-	}
-	return u.users, nil
-}
+
 func (u *UserRepo) GetUserByEmail(email string) (*models.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()

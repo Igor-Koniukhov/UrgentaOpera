@@ -13,7 +13,11 @@ const authentication = {
         isSignedUp: false,
         signUpError: null,
         isLogin: false,
-        loginError: null
+        loginError: null,
+        snackbar: {
+            show: false,
+            text: "",
+        },
     },
     mutations: {
         userRegistration(state, payload) {
@@ -37,6 +41,20 @@ const authentication = {
         setLoginError(state, payload) {
             state.loginError = payload.error
         },
+        showSnackbar(state, text) {
+            let timeout = 0;
+            if (state.snackbar.show) {
+                state.snackbar.show = false;
+                timeout = 300;
+            }
+            setTimeout(() => {
+                state.snackbar.show = true;
+                state.snackbar.text = text;
+            }, timeout);
+        },
+        hideSnackBar(state) {
+            state.snackbar.show = false;
+        },
 
     },
     actions: {
@@ -54,8 +72,10 @@ const authentication = {
                 commit('setSignUpError', {
                     error: null,
                 })
+                console.log(response)
                 localStorage.setItem('userId', response.data.id)
                 commit('userRegistration', payload)
+                commit('showSnackbar', "Success! Now login!")
             } catch (err) {
                 commit('setIsNotSignedUp')
                 commit('setSignUpError', {
@@ -70,12 +90,11 @@ const authentication = {
                     email: payload.email,
                     password: payload.password,
                 })
-                console.log("login success", payload)
-                console.log("login success", response)
                 commit('setIsLogin')
                 commit('setLoginError', {
                     error: null,
                 })
+                commit('showSnackbar', "Success! You are login!")
             } catch (err) {
                 console.log(err.message)
                 commit('setIsNotLogin')

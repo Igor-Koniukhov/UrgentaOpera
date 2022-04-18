@@ -1,28 +1,32 @@
 <template>
-  <div class="home">
-    <field-add-task />
-    <div class="pa-3" v-if="$store.state.todo.tasks.length">
-      <draggable handle=".handle-board" group="board" v-model="boards">
-        <list-tasks
-          class="ma-1 board"
-          v-for="(board, index) in boards"
-          :key="board.list"
-          :index="index"
-          :board="board"
-          :list="board.list"
-        />
-      </draggable>
+  <div class="home" >
+    <h1 class="text-center mt-9" v-if="!$store.state.auth.isLogin">For working with ToDo application you need to be registered or login.</h1>
+    <div v-if="$store.state.auth.isLogin">
+      <field-add-task  />
+      <div class="pa-3" v-if="$store.state.todo.tasks.length">
+        <draggable handle=".handle-board" group="board" v-model="boards">
+          <list-tasks
+              class="ma-1 board"
+              v-for="(board, index) in boards"
+              :key="board.list"
+              :index="index"
+              :board="board"
+              :list="board.list"
+          />
+        </draggable>
+      </div>
+
+      <no-tasks v-else />
+      <button-done-sorting
+          v-if="$store.state.todo.sorting"
+          :toggleSorting="toggleSorting"
+      />
+      <button-done-sorting
+          v-if="$store.state.todo.boardSorting"
+          :toggleSorting="toggleBoardSorting"
+      />
     </div>
 
-    <no-tasks v-else />
-    <button-done-sorting
-      v-if="$store.state.todo.sorting"
-      :toggleSorting="toggleSorting"
-    />
-    <button-done-sorting
-      v-if="$store.state.todo.boardSorting"
-      :toggleSorting="toggleBoardSorting"
-    />
   </div>
 </template>
 

@@ -62,6 +62,10 @@ export default {
         password: this.login.password
       })
       this.reset()
+      setTimeout(()=>{
+        this.$router.push('/')
+      }, 2000)
+
 
     },
     reset () {

@@ -1,10 +1,10 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" :mobile-breakpoint="768" app>
-      <v-img class="avatar-back" height="170" src="wheat.jpg">
-        <div class="img-justify pt-6">
+    <v-navigation-drawer v-model="drawer" :mobile-breakpoint="768" app >
+      <v-img class="avatar-back" height="170" src="wheat.jpg" >
+        <div class="img-justify pt-6" v-if="$store.state.auth.isLogin">
           <v-avatar size="60">
-            <img class="img-avatar" src="i_koniukhov.jpg" alt="Igor"/>
+            <img class="img-avatar" src="i_koniukhov.jpg" alt="Igor" />
           </v-avatar>
           <div class="avatar-text avatar-text__frederica">Koniukhov Igor</div>
           <div class="avatar-text">
@@ -14,7 +14,7 @@
       </v-img>
       <v-list dense nav>
         <div v-for="item in items" :key="item.title" k>
-          <v-list-item  :to="item.to" lin>
+          <v-list-item  :to="item.to" lin  v-if="$store.state.auth.isLogin">
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
 
@@ -90,7 +90,12 @@
     <v-main>
       <router-view></router-view>
       <snack-bar/>
+      <auth-message/>
     </v-main>
+    <dialog-logout
+        v-if="dialogs.logout"
+        @close="dialogs.logout=false"
+    />
   </v-app>
 </template>
 
@@ -100,8 +105,13 @@ export default {
     "snack-bar": require("@/components/Shared/SnackBar.vue").default,
     "search": require("@/components/Tools/Search.vue").default,
     "live-date-time": require("@/components/Tools/LiveDateTime.vue").default,
+    "dialog-logout": require("@/components/Dialogs/DialogLogout.vue").default,
+    "auth-message": require("@/components/Shared/AuthMessage.vue").default,
   },
   data: () => ({
+    dialogs:{
+      logout: false
+    },
 
     drawer: null,
     items: [
@@ -118,8 +128,8 @@ export default {
   },
   methods:{
     Logout(){
-      this.$store.commit('auth/setIsNotLogin')
-      this.$router.push('/login')
+      this.dialogs.logout=true
+      this.$emit.close()
     }
 
   },

@@ -1,6 +1,9 @@
+import axios from "axios";
 import Localbase from "localbase";
+
 let db = new Localbase("db");
 db.config.debug = false;
+
 const todoModule = {
     namespaced: true,
     state: {
@@ -100,7 +103,7 @@ const todoModule = {
         },
     },
     actions: {
-        addTask({ commit }, newTaskTitle) {
+       async addTask({ commit }, newTaskTitle) {
             let newTask = {
                 id: Date.now(),
                 list: 1,
@@ -108,6 +111,13 @@ const todoModule = {
                 done: false,
                 dueDone: null,
             };
+            const response = await axios.post('/create-task', {
+                ticket_id: newTask.list,
+                title: newTaskTitle,
+                done: false,
+                dueDone: null,
+            })
+           console.log(response)
             db.collection("tasks")
                 .add(newTask)
                 .then(() => {
