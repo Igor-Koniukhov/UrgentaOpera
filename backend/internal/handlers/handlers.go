@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"todo/backend/internal/configs"
-	"todo/backend/internal/repository"
-	"todo/backend/services/jwtoken"
+	"todo/internal/configs"
+	"todo/internal/repository"
+	"todo/services/jwtoken"
 )
 
 var W *HandlerStruct

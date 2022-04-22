@@ -17,3 +17,13 @@ migrate-reset:
 migrate-status:
 	goose -dir ./migrations -table migrations mysql $(DB_CONNECTION) status
 
+up:
+	docker-compose up -d
+	docker-compose exec migration /app/migrate up
+
+upb:
+	docker-compose up --build -d
+	docker-compose exec migration /app/migrate up
+
+down:
+	docker-compose down

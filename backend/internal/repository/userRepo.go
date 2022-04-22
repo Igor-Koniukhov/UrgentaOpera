@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"time"
-	"todo/backend/internal/configs"
-	models2 "todo/backend/internal/models"
+	"todo/internal/configs"
+	models2 "todo/internal/models"
 )
 
 type UserRepository interface {
