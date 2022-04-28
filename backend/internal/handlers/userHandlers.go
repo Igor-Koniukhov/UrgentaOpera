@@ -9,10 +9,10 @@ import (
 	"math/rand"
 	"net/http"
 	"net/smtp"
-	"todo/backend/internal/configs"
-	models2 "todo/backend/internal/models"
-	"todo/backend/internal/repository"
-	"todo/backend/services/jwtoken"
+	"todo/internal/configs"
+	models2 "todo/internal/models"
+	"todo/internal/repository"
+	"todo/services/jwtoken"
 )
 
 type UserI interface {

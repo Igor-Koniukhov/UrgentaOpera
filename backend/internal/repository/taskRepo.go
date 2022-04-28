@@ -5,8 +5,8 @@ import (
 	"database/sql"
 	"fmt"
 	"time"
-	"todo/backend/internal/configs"
-	models2 "todo/backend/internal/models"
+	"todo/internal/configs"
+	models2 "todo/internal/models"
 )
 
 type TaskRepository interface {

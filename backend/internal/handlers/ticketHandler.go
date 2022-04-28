@@ -10,9 +10,9 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
-	"todo/backend/internal/configs"
-	"todo/backend/internal/models"
-	"todo/backend/internal/repository"
+	"todo/internal/configs"
+	"todo/internal/models"
+	"todo/internal/repository"
 )
 
 type TicketI interface {

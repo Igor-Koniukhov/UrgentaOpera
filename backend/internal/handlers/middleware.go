@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"todo/backend/internal/configs"
-	jwtoken2 "todo/backend/services/jwtoken"
+	"todo/internal/configs"
+	jwtoken2 "todo/services/jwtoken"
 )
 
 type MiddlewareI interface {

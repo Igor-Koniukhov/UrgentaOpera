@@ -1,11 +1,14 @@
-### Example user template template
-### Example user template
 
-# IntelliJ project files
-.idea
+../.idea
 *.iml
 out
 gen
+*.exe
+*.exe~
+/node_modules
+/storage/*.key
+/vendor
+/logs
 .env
 .env.testing
 .env.test
@@ -37,5 +40,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
-.dbdata

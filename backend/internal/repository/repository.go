@@ -2,7 +2,7 @@ package repository
 
 import (
 	"database/sql"
-	"todo/backend/internal/configs"
+	"todo/internal/configs"
 )
 
 type Repository struct {

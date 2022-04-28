@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8.0.28
+    restart: always
+    volumes:
+      - .dbdata:/var/lib/mysql
+    env_file:
+      - ./env/msql.env
+    ports:
+      - '33066:3306'
+    networks:
+      - backend
+
+  migration:
+    build: ./migrations
+    env_file:
+      - backend/.env
+    depends_on:
+        - db
+    tty: true
+  backend:
+    build: ./backend
+    ports:
+      - '8000:8000'
+    networks:
+      - backend
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+    env_file:
+      - backend/.env
+    depends_on:
+      - db
+    tty: true
+    restart: always
+  frontend:
+    build: frontend
+    ports:
+      - '8080:8080'
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+networks:
+  backend:
+    driver: bridge
+  db:
+    driver: bridge
+  frontend:
+    driver: bridge
+
+volumes:
+  data:
+  logs:
+
+

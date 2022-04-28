@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"todo/backend/internal/configs"
-	models2 "todo/backend/internal/models"
-	"todo/backend/internal/repository"
+	"todo/internal/configs"
+	models2 "todo/internal/models"
+	"todo/internal/repository"
 )
 
 type JwTokenI interface {
