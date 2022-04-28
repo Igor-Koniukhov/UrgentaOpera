@@ -11,7 +11,12 @@ FROM alpine:3.14.6
 
 WORKDIR /app
 
-COPY --from=build /go/bin/goose/ app/migrations
+COPY --from=build /go/bin/goose /app/
+COPY --from=build /app/migrations /app/
+
+#RUN /app/goose mysql $DSN up
+CMD sleep 15 && /app/goose mysql $DSN up
+
 
 
 

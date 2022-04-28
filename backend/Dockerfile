@@ -6,6 +6,7 @@ COPY go.sum .
 RUN go mod download
 
 COPY . .
+EXPOSE 8000
 
 CMD ["go", "run", "./cmd/main.go"]
 
